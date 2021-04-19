@@ -7,6 +7,9 @@
     <CudaCompile Include="src\Map.cu">
       <Filter>src</Filter>
     </CudaCompile>
+    <CudaCompile Include="src\compact.cu">
+      <Filter>src</Filter>
+    </CudaCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -15,6 +18,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Map.cuh">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\compact.cuh">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

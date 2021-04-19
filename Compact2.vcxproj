@@ -11,10 +11,12 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <CudaCompile Include="src\compact.cu" />
     <CudaCompile Include="src\main.cu" />
     <CudaCompile Include="src\Map.cu" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\compact.cuh" />
     <ClInclude Include="src\Map.cuh" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
