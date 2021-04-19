@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 
-void* Compact::compress(const char* data, const unsigned int size, void(*pred)(char*, int*))
+char* Compact::compress(const char* data, const unsigned int size, void(*pred)(char*, int*))
 {
     Compact compact(data, size, pred);
     return compact();
@@ -12,31 +12,14 @@ void* Compact::compress(const char* data, const unsigned int size, void(*pred)(c
 
 char* Compact::operator()()
 {
-    printf("data: ");
-    for (int i = 0; i < size; i++)
-        printf("%c ", cpuData[i]);
-    printf("\n");
-
     cudaMalloc(&dataGPU, sizeof(char) * size);
     cudaMemcpy(dataGPU, cpuData, sizeof(char) * size, cudaMemcpyHostToDevice);
 
     mapPred();
-    int* preds = new int(size);
-    cudaMemcpy(preds, predGPU, sizeof(int) * size, cudaMemcpyDeviceToHost);
-    printf("pred: ");
-    for (int i = 0; i < size; i++)
-        printf("%d ", preds[i]);
-    printf("\n");
 
     scanSum();
     int predCount = 0;
     cudaMemcpy(&predCount, &offsetGPU[size-1], sizeof(int), cudaMemcpyDeviceToHost);
-    int* offsets = new int(size);
-    cudaMemcpy(offsets, offsetGPU, sizeof(int) * size, cudaMemcpyDeviceToHost);
-    printf("offs: ");
-    for (int i = 0; i < size; i++)
-        printf("%d ", offsets[i]);
-    printf("\n");
 
     mapGather(predCount);
 

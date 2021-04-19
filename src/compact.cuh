@@ -18,7 +18,7 @@ private:
 
     char* operator()();
 public:
-    static void* compress(const char* data, const unsigned int size, void (*pred)(char*, int*));
+    static char* compress(const char* data, const unsigned int size, void (*pred)(char*, int*));
 
     Compact(const char* data, const unsigned int size, void (*pred)(char*, int*))
     : cpuData(data),size(size),predictor(pred){}
