@@ -3,25 +3,25 @@
 
 class Compact {
 private:
-    const char* cpuData;
-    unsigned int size;
-    char* dataGPU = nullptr;
+    const void* dataCPU;
+    const size_t elementSize;
+    const size_t elementCount;
+    void* dataGPU = nullptr;
     int* predGPU = nullptr;
     int* offsetGPU = nullptr;
     char* resultGPU = nullptr;
+    size_t predCount = 0;
 
-    void (*predictor)(char*, int*);
+    void (*predictor)(void*, int*);
 
-    void mapPred();
-    void scanSum();
-    void mapGather(int);
-
-    char* operator()();
 public:
-    static char* compress(const char* data, const unsigned int size, void (*pred)(char*, int*));
+    size_t operator()(void** compressedData);
 
-    Compact(const char* data, const unsigned int size, void (*pred)(char*, int*))
-    : cpuData(data),size(size),predictor(pred){}
+    Compact(const void* data, const size_t elementSize, const size_t elementCount, void (*pred)(void*, int*))
+    : dataCPU(data),
+        elementSize(elementSize),
+        elementCount(elementCount),
+        predictor(pred){}
 
     ~Compact() {
         if (dataGPU != nullptr)

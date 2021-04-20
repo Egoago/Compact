@@ -13,11 +13,9 @@
   <ItemGroup>
     <CudaCompile Include="src\compact.cu" />
     <CudaCompile Include="src\main.cu" />
-    <CudaCompile Include="src\Map.cu" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\compact.cuh" />
-    <ClInclude Include="src\Map.cuh" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{ABE1CF7D-CBC1-4F19-9E0D-3BB9A17DFBF7}</ProjectGuid>
