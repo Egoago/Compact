@@ -43,5 +43,6 @@ size_t Compact::operator()(void** compressedData)
     cudaFree(predGPU);
     cudaFree(offsetGPU);
     cudaFree(resultGPU);
+    //cudaDeviceSynchronize();
     return predCount;
 }
